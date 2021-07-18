@@ -13,10 +13,13 @@ function LeaderBoard(props) {
   const history = useHistory();
 
   const handleClick = (path) => {
+
+    // remove starting '/' from slash
     if (path.charAt(0) === '/') {
       path = path.slice(1);
     }
 
+    // sort data based on path
     let data;
     if (path === 'name') {
       data = response.list.sort((a, b) => {
@@ -49,6 +52,7 @@ function LeaderBoard(props) {
     setTableData([...data]);
   }
 
+  // if there is a path change, call hanlde click
   useEffect(() => {
     if (history.location.pathname !== '/') {
       handleClick(history.location.pathname);
