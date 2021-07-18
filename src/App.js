@@ -11,7 +11,6 @@ function App() {
     <Router>
       <Route path="/">
         <div className="App">
-          <h8k-navbar header={title}></h8k-navbar>
           <LeaderBoard />
         </div>
       </Route>
