@@ -1,10 +1,12 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Age = ({ handleClick }) => (
-  <button data-testid="route-age" className='outlined' type="button" onClick={()=>handleClick('age')}>
-    <Link to="/age">Age</Link>
-  </button>
+  <Link to="/age">
+    <button data-testid="route-age" className='outlined' type="button" onClick={() => handleClick('age')}>
+      Age
+    </button>
+  </Link>
 );
 
 export default Age;

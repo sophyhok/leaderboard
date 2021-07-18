@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { response } from '../response';
 import Table from './Table';
 import Rank from './Rank';
 import Age from './Age';
 import Name from './Name';
 import Points from './Points';
-import ButtonGroup from './ButtonGroups';
-
-const index = 0;
 
 function LeaderBoard(props) {
   const [tableData, setTableData] = useState(response.list);
@@ -16,6 +13,10 @@ function LeaderBoard(props) {
   const history = useHistory();
 
   const handleClick = (path) => {
+    if (path.charAt(0) === '/') {
+      path = path.slice(1);
+    }
+
     let data;
     if (path === 'name') {
       data = response.list.sort((a, b) => {
@@ -46,36 +47,26 @@ function LeaderBoard(props) {
       })
     }
     setTableData([...data]);
-    console.log("hey")
   }
 
-  console.log(history)
+  useEffect(() => {
+    if (history.location.pathname !== '/') {
+      handleClick(history.location.pathname);
+    }
+  }, [history.location.pathname])
 
   return (
-    <Router>
-      <div className="text-center mt-50">
+    <div className="text-center mt-50">
+      <div>
         <div>
-          <div>
-
-            {/* <Route path="/rank" render={() => handleClick('rank')}> */}
-            <Rank handleClick={handleClick} />
-            {/* </Route> */}
-            {/* <Route path="/name"> */}
-            <Name handleClick={handleClick} />
-            {/* </Route> */}
-            {/* <Route path="/points"> */}
-            <Points handleClick={handleClick} />
-            {/* </Route> */}
-            {/* <Route path="/rank"> */}
-            <Age handleClick={handleClick} />
-            {/* </Route> */}
-
-          </div>
-
+          <Rank handleClick={handleClick} />
+          <Name handleClick={handleClick} />
+          <Points handleClick={handleClick} />
+          <Age handleClick={handleClick} />
         </div>
-        <Table data={tableData} />
       </div>
-    </Router>
+      <Table data={tableData} />
+    </div>
   );
 }
 

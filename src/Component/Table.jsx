@@ -1,7 +1,6 @@
 import React from 'react';
 
-const Table = ({ data, index }) => {
-  console.log("dataasss ", data)
+const Table = ({ data }) => {
   return (
     <div className="card mx-auto pb-20 mb-30" style={{ width: '50%' }}>
       <table className="mt-50" data-testid="app-table">
@@ -14,7 +13,7 @@ const Table = ({ data, index }) => {
           </tr>
         </thead>
         <tbody data-testid="app-tbody">
-          {data.map(item => {
+          {data.map((item, index) => {
             return (
               <tr key={item.rank}>
                 <td data-testid={`rank-${index}`}>{item.rank}</td>
